@@ -35,13 +35,33 @@
   height: 100%;
 }
 .triggers__btn {
-  background-color: rgba(121, 138, 230, 0.8);
-  color: white;
-  font-size: 20px;
   width: 40px;
   height: 40px;
   border: 2px solid rgb(129, 147, 244);
   outline: none;
   border-radius: 50%;
   cursor: pointer;
+  background-color: rgba(121, 138, 230, 0.8);
+  color: white;
+  font-size: 20px;
+}
+
+.rounds {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+}
+.rounds__btn {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgb(129, 147, 244);
+  outline: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.rounds__btn--selected {
+  background-color: rgba(121, 138, 230, 0.8);
 }/*# sourceMappingURL=style.css.map */

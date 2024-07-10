@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+@mixin btn($size) {
+    width: $size;
+    height: $size;
+    border: 2px solid rgb(129, 147, 244);
+    outline: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .frame {
     position: relative;
     overflow: hidden;
@@ -35,14 +44,26 @@
     height: 100%;
 
     &__btn {
+        @include btn(40px);
         background-color: rgba(121, 138, 230, 0.8);
         color: white;
         font-size: 20px;
-        width: 40px;
-        height: 40px;
-        border: 2px solid rgb(129, 147, 244);
-        outline: none;
-        border-radius: 50%;
-        cursor: pointer;
+    }
+}
+
+.rounds {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+
+    &__btn {
+        @include btn(15px);
+
+        &--selected {
+            background-color: rgba(121, 138, 230, 0.8);
+        }
     }
 }

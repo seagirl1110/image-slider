@@ -16,24 +16,26 @@ const createEl = (tag, className) => {
 const frame = createEl('div', 'frame');
 const cards = createEl('div', 'cards');
 const triggers = createEl('div', 'triggers');
+const rounds = createEl('div', 'rounds');
 
-const btnPrev = createEl('button', 'triggers__btn btn--prev');
+const btnPrev = createEl('button', 'triggers__btn');
 btnPrev.textContent = '<';
-const btnNext = createEl('button', 'triggers__btn btn--next');
+const btnNext = createEl('button', 'triggers__btn');
 btnNext.textContent = '>';
 
 triggers.append(btnPrev, btnNext);
-frame.append(cards, triggers);
+frame.append(cards, triggers, rounds);
 root.append(frame);
 
-images.forEach((imageUrl, index) => {
-  const card = createEl('div', `card card--${index + 1}`);
-  card.style.backgroundImage = `url(${imageUrl})`;
-
-  cards.append(card);
-});
-
 let sliderIndex = 0;
+
+setRoundBtnSelected = (btnCurrent) => {
+  const btnSelected = rounds.querySelector('.rounds__btn--selected');
+  if (btnSelected) {
+    btnSelected.classList.remove('rounds__btn--selected');
+  }
+  btnCurrent.classList.add('rounds__btn--selected');
+};
 
 const toggleImage = (direction) => {
   if (direction === 'next' && sliderIndex !== images.length - 1) {
@@ -42,7 +44,29 @@ const toggleImage = (direction) => {
     sliderIndex -= 1;
   }
   cards.style.left = `${sliderIndex * -500}px`;
+
+  const roundsBtnColl = rounds.querySelectorAll('.rounds__btn');
+  setRoundBtnSelected(roundsBtnColl[sliderIndex]);
 };
+
+images.forEach((imageUrl, index) => {
+  const card = createEl('div', 'card');
+  card.style.backgroundImage = `url(${imageUrl})`;
+  cards.append(card);
+
+  const roundBtn = createEl('button', 'rounds__btn');
+  if (index === sliderIndex) {
+    roundBtn.classList.add('rounds__btn--selected');
+  }
+  rounds.append(roundBtn);
+
+  roundBtn.addEventListener('click', function () {
+    sliderIndex = index;
+    cards.style.left = `${sliderIndex * -500}px`;
+
+    setRoundBtnSelected(this);
+  });
+});
 
 btnPrev.addEventListener('click', () => {
   toggleImage('prev');
